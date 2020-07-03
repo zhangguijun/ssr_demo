@@ -3,7 +3,9 @@ import express from 'express'
 import React from 'react'
 import Home from './containers/Home/index'
 import { renderToString } from 'react-dom/server'
-
+// 虚拟dom  =》 JavaScript 对象的映射
+// 加快首屏渲染  利于seo
+// 缺点 大量消耗服务器性能，浪费不必要的服务器性能
 const app = express()
 const port = 3000
 const content = renderToString(<Home />)
