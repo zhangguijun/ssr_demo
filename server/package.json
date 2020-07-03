@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./build/bundle.js",
-    "dev:build": "webpack --config webpack.server.js --watch",
+    "dev:server:build": "webpack --config webpack.server.js --watch",
+    "dev:client:build": "webpack --config webpack.client.js --watch",
     "dev:start1": "nodemon --watch build --exec node \"./build/bundle.js\"",
     "dev": "npm-run-all --parallel dev:**"
   },

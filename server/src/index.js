@@ -8,6 +8,7 @@ import { renderToString } from 'react-dom/server'
 // 缺点 大量消耗服务器性能，浪费不必要的服务器性能
 const app = express()
 const port = 3000
+app.use(express.static('public'))
 const content = renderToString(<Home />)
 
 app.get('/', (req, res) => res.send(
@@ -15,7 +16,8 @@ app.get('/', (req, res) => res.send(
     <html>
     <title>ssr</title>
     <body>
-      ${content}
+      <div id="root">${content}</div>
+      <script src="/index.js"></script>
     </body>
     </html>
  `
