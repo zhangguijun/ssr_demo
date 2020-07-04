@@ -4,17 +4,14 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 
 import Routes from '../Routes'
-import { createStore, applyMiddleware } from 'redux'
+import getStore from '../store'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
-const reducer = (state = { name: 'zhanghao' }, action) => {
-  return state;
-}
-const store = createStore(reducer, applyMiddleware(thunk));
+
+
 // 客户端路由配置
 const App = () => {
   return (
-    <Provider store={store}>
+    <Provider store={getStore()}>
       <BrowserRouter>
         {Routes}
       </BrowserRouter>
