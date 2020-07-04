@@ -8,7 +8,7 @@ import { getHomeList } from './store/actions'
 class Home extends Component {
   componentDidMount() {
     if(!this.props.list.length){
-      this.props.getHomList(false)
+      this.props.getHomeList()
     }
   }
   getList() {
@@ -33,7 +33,7 @@ class Home extends Component {
 // }
 Home.loadData = (store) => {
   // 负责在服务端渲染之前，把这个路由需要的数据提前加载好
-  return store.dispatch(getHomeList(true))
+  return store.dispatch(getHomeList())
 }
 const mapStateToProps = state => (
   {
@@ -41,7 +41,7 @@ const mapStateToProps = state => (
   }
 )
 const mapDispatchProps = dispatch => ({
-  getHomList() {
+  getHomeList() {
     console.log('11')
     dispatch(getHomeList())
   }
