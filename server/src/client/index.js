@@ -4,14 +4,14 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
 
 import routes from '../Routes'
-import getStore from '../store'
+import { getClientStore } from '../store'
 import { Provider } from 'react-redux'
 
-
+const store = getClientStore();
 // 客户端路由配置
 const App = () => {
   return (
-    <Provider store={getStore()}>
+    <Provider store={store}>
       <BrowserRouter>
         {/* {Routes} */}
         <div>

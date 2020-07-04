@@ -3,7 +3,7 @@ import express from 'express'
 import { matchRoutes } from 'react-router-config'
 import routes from '../Routes'
 import { render } from './utils'
-import getStore from '../store'
+import { getStore } from '../store'
 // 虚拟dom  =》 JavaScript 对象的映射
 // 加快首屏渲染  利于seo
 // 缺点 大量消耗服务器性能，浪费不必要的服务器性能
@@ -25,9 +25,9 @@ app.get('*', (req, res) => {
     }
   })
   Promise.all(promises).then(() => {
-    res.send(render (store, routes, req ))
+    res.send(render(store, routes, req))
   })
- 
+
 })
 
 

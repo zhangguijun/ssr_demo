@@ -1,11 +1,11 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter, Route } from 'react-router-dom'
-import { matchRoutes } from 'react-router-config'
+// import { matchRoutes } from 'react-router-config'
 // import getStore from '../store'
 // import routes from '../Routes'
 import { Provider } from 'react-redux'
-export const render = ( store, routes, req ) => {
+export const render = (store, routes, req) => {
   // 拿到异步数据 填充到store中
   // store 填充 需要根据用户请求地址和路由做判断
   // 如果用户访问/ 就拿home组件异步数据
@@ -44,14 +44,19 @@ export const render = ( store, routes, req ) => {
     </Provider>
   ))
   return `
-    <html>
-      <head>
-      </head>
-      <title>ssr demo</title>
-      <body>
-        <div id="root">${content}</div>
-        <script src='/index.js'></script>
-      </body>
-    </html>
-  `
+      <html>
+        <head>
+        </head>
+        <title>ssr demo</title>
+        <body>
+          <div id="root">${content}</div>
+          <script>
+            window.context = {
+              state: ${JSON.stringify(store.getState())}
+            }
+          </script>
+          <script src='/index.js'></script>
+        </body>
+      </html>
+    `
 }

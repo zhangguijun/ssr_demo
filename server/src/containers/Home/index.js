@@ -7,7 +7,9 @@ import { getHomeList } from './store/actions'
 // 同构 一套react 代码 在服务端执行一次，在客户端执行一次
 class Home extends Component {
   componentDidMount() {
-    this.props.getHomList()
+    if(!this.props.list.length){
+      this.props.getHomList()
+    }
   }
   getList() {
     const { list } = this.props
