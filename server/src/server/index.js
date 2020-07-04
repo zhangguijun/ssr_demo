@@ -1,5 +1,6 @@
 // const express = require('express')
 import express from 'express'
+import proxy from 'express-http-proxy'
 import { matchRoutes } from 'react-router-config'
 import routes from '../Routes'
 import { render } from './utils'
@@ -12,7 +13,13 @@ import { getStore } from '../store'
 const app = express()
 const port = 3000
 app.use(express.static('public'))
-
+// 当访问 /api 路由时代理到指定服务器地址
+app.use('/api', proxy('http://localhost:4000', {
+  proxyReqPathResolver: function(req) {
+    console.log(req.url) 
+    return '' + req.url
+  }
+}))
 // 服务器路由配置
 app.get('*', (req, res) => {
   const store = getStore();
