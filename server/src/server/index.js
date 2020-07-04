@@ -1,8 +1,9 @@
 // const express = require('express')
 import express from 'express'
-
+import { matchRoutes } from 'react-router-config'
+import routes from '../Routes'
 import { render } from './utils'
-
+import getStore from '../store'
 // 虚拟dom  =》 JavaScript 对象的映射
 // 加快首屏渲染  利于seo
 // 缺点 大量消耗服务器性能，浪费不必要的服务器性能
@@ -14,8 +15,19 @@ app.use(express.static('public'))
 
 // 服务器路由配置
 app.get('*', (req, res) => {
+  // const store = getStore();
+  // const matchedRoutes = matchRoutes(routes, req.path)
+  // const promises = []
 
-  res.send(render(req))
+  // matchedRoutes.forEach(item => {
+  //   if (item.route.loadData) {
+  //     promises.push(item.route.loadData(store))
+  //   }
+  // })
+  // Promise.all(promises).then(() => {
+    render (req, res)
+  // })
+ 
 })
 
 
