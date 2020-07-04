@@ -15,18 +15,18 @@ app.use(express.static('public'))
 
 // 服务器路由配置
 app.get('*', (req, res) => {
-  // const store = getStore();
-  // const matchedRoutes = matchRoutes(routes, req.path)
-  // const promises = []
+  const store = getStore();
+  const matchedRoutes = matchRoutes(routes, req.path)
+  const promises = []
 
-  // matchedRoutes.forEach(item => {
-  //   if (item.route.loadData) {
-  //     promises.push(item.route.loadData(store))
-  //   }
-  // })
-  // Promise.all(promises).then(() => {
-    render (req, res)
-  // })
+  matchedRoutes.forEach(item => {
+    if (item.route.loadData) {
+      promises.push(item.route.loadData(store))
+    }
+  })
+  Promise.all(promises).then(() => {
+    res.send(render (store, routes, req ))
+  })
  
 })
 
