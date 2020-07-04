@@ -25,14 +25,14 @@ app.get('*', (req, res) => {
   const store = getStore();
   const matchedRoutes = matchRoutes(routes, req.path)
   const promises = []
-
+  const context = {}
   matchedRoutes.forEach(item => {
     if (item.route.loadData) {
       promises.push(item.route.loadData(store))
     }
   })
   Promise.all(promises).then(() => {
-    res.send(render(store, routes, req))
+    res.send(render(store, routes, req, context))
   })
 
 })

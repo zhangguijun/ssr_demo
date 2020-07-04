@@ -9,5 +9,24 @@ const clientConfig = {
         filename: 'index.js',
         path: path.resolve(__dirname, 'public')
     },
+    module: {
+        rules: [ {
+            test: /\.less?$/,
+            use: ['style-loader', 'css-loader', 'less-loader']
+        },
+        {
+            test: /\.css?$/,
+            use: ['style-loader', {
+                loader: 'css-loader',
+                options: {
+                    importLoaders: 1,
+                    modules: true,
+                    localIdentName: '[name]_[local]_[hash:base64:5]'
+                }
+            }]
+        }
+
+        ]
+    }
 }
 module.exports = merge(config, clientConfig)

@@ -5,7 +5,7 @@ import { renderRoutes } from 'react-router-config'
 // import getStore from '../store'
 // import routes from '../Routes'
 import { Provider } from 'react-redux'
-export const render = (store, routes, req) => {
+export const render = (store, routes, req, context) => {
   // 拿到异步数据 填充到store中
   // store 填充 需要根据用户请求地址和路由做判断
   // 如果用户访问/ 就拿home组件异步数据
@@ -31,7 +31,7 @@ export const render = (store, routes, req) => {
   // 执行loadData 获取数据填充到store
   const content = renderToString((
     <Provider store={store}>
-      <StaticRouter context={{}} location={req.path}>
+      <StaticRouter context={context} location={req.path}>
         {/* {Routes} */}
         <div>
           {/* {
@@ -44,11 +44,14 @@ export const render = (store, routes, req) => {
       </StaticRouter>
     </Provider>
   ))
+  const cssStr = context.css ? context.css : '';
+  console.log(cssStr)
   return `
       <html>
         <head>
         </head>
         <title>ssr demo</title>
+        <style>${cssStr}</style>
         <body>
           <div id="root">${content}</div>
           <script>

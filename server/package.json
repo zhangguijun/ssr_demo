@@ -38,6 +38,7 @@
   "devDependencies": {
     "css-loader": "^1.0.0",
     "isomorphic-style-loader": "^4.0.0",
+    "less-loader": "^6.2.0",
     "style-loader": "^0.22.1"
   }
 }
