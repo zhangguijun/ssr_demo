@@ -4,7 +4,7 @@ module.exports = {
   target: 'node',
   // webpack4 要区分 你打包的是线上环境还是测试环境 需要配置mode
   mode: 'development',
-  entry: './src/index.js',
+  entry: './src/server/index.js',
   output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'build')
@@ -20,11 +20,11 @@ module.exports = {
         // 额外的配置项 options  正确的编译react babel-preset-react es2015/2017 stage-0
         // 打包的时候兼容最新的两个浏览器版本
         options: {
-            presets: ['react', 'stage-0', ['env', {
+            presets: ['react', ['env', {
                 targets: {
                     browsers: ['last 2 versions']
                 }
-            }]]
+            }], 'stage-0']
         }
     }]
 }

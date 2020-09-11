@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-
-const Home = () => {
+import { observer, inject } from "mobx-react";
+import { withRouter } from 'react-router-dom';
+import Header from '../../components/Header';
+const Home = (props) => {
   return (
     <div>
-      Home liessss 这是home
+      <Header />
+      Home liessss 这是homehjhj  name: {props.store.state.name}
     </div>
   )
 }
-
-export default Home
+export default withRouter(
+  inject('store')(
+    observer(Home)
+  )
+);

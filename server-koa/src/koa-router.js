@@ -1,20 +1,14 @@
 import Router from 'koa-router'
-import React from 'react';
-import Home from './containers/Home/index';
-import { renderToString } from 'react-dom/server'
+import { render } from './server/util'
+
 const routers = new Router();
-const content = renderToString(<Home />)
+
 routers.get('/', (ctx, next) => {
-  ctx.body =
-  `
-    <html>
-      <title>ssr dome</title>
-      <body>
-        <div id='root'>${content}</div>
-        <script type="text/javascript" src="/index.js"></script>
-      </body>
-    </html>
-    `
-    next()
+  ctx.body = render(ctx)
+  next()
+})
+routers.get('/login', (ctx, next) => {
+  ctx.body = render(ctx)
+  next()
 })
 export default routers

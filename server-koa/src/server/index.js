@@ -1,12 +1,16 @@
 // const Koa = require('koa')
 import Koa from 'koa';
-import staticServer from 'koa-static'
-import routes from '../koa-router'
+import koaStatic from 'koa-static';
+import routes from '../koa-router';
+
 const app = new Koa();
 
 const PORT = 9000;
-// app.use(staticServer(__dirname , '../public'))
-app.use(staticServer(path.resolve(__dirname, 'public')));
+
+// 静态资源
+app.use(
+  koaStatic('./public')
+);
 app.use(routes.routes(), routes.allowedMethods())
 
 app.listen(PORT, () => {

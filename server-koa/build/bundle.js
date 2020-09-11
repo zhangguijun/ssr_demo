@@ -81,10 +81,34 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/server/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./src/Routes.js":
+/*!***********************!*\
+  !*** ./src/Routes.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _Home = __webpack_require__(/*! ./containers/Home */ \"./src/containers/Home/index.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nvar _Login = __webpack_require__(/*! ./containers/Login */ \"./src/containers/Login/index.js\");\n\nvar _Login2 = _interopRequireDefault(_Login);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = _react2.default.createElement(\n  'div',\n  null,\n  _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _Home2.default }),\n  _react2.default.createElement(_reactRouterDom.Route, { path: '/login', exact: true, component: _Login2.default })\n);\n\n//# sourceURL=webpack:///./src/Routes.js?");
+
+/***/ }),
+
+/***/ "./src/components/Header.js":
+/*!**********************************!*\
+  !*** ./src/components/Header.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Header = function Header() {\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(\n      _reactRouterDom.Link,\n      { to: '/' },\n      'home'\n    ),\n    ' ',\n    _react2.default.createElement('br', null),\n    _react2.default.createElement(\n      _reactRouterDom.Link,\n      { to: '/login' },\n      'login'\n    )\n  );\n};\n\nexports.default = Header;\n\n//# sourceURL=webpack:///./src/components/Header.js?");
+
+/***/ }),
 
 /***/ "./src/containers/Home/index.js":
 /*!**************************************!*\
@@ -94,19 +118,19 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Home = function Home() {\n  return _react2.default.createElement(\n    'div',\n    null,\n    'Home liessss \\u8FD9\\u662Fhome'\n  );\n};\n\nexports.default = Home;\n\n//# sourceURL=webpack:///./src/containers/Home/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _mobxReact = __webpack_require__(/*! mobx-react */ \"mobx-react\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _Header = __webpack_require__(/*! ../../components/Header */ \"./src/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Home = function Home(props) {\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(_Header2.default, null),\n    'Home liessss \\u8FD9\\u662Fhomehjhj  name: ',\n    props.store.state.name\n  );\n};\nexports.default = (0, _reactRouterDom.withRouter)((0, _mobxReact.inject)('store')((0, _mobxReact.observer)(Home)));\n\n//# sourceURL=webpack:///./src/containers/Home/index.js?");
 
 /***/ }),
 
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
+/***/ "./src/containers/Login/index.js":
+/*!***************************************!*\
+  !*** ./src/containers/Login/index.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _koa = __webpack_require__(/*! koa */ \"koa\");\n\nvar _koa2 = _interopRequireDefault(_koa);\n\nvar _koaRouter = __webpack_require__(/*! ./koa-router */ \"./src/koa-router.js\");\n\nvar _koaRouter2 = _interopRequireDefault(_koaRouter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// const Koa = require('koa')\nvar app = new _koa2.default();\n\nvar PORT = 9000;\n\napp.use(_koaRouter2.default.routes(), _koaRouter2.default.allowedMethods());\n\napp.listen(PORT, function () {\n  console.log('\\u670D\\u52A1\\u5668\\u5DF2\\u7ECF\\u542F\\u52A8\\uFF0C\\u8BF7\\u8BBF\\u95EEhttp://localhost:' + PORT);\n});\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _Header = __webpack_require__(/*! ../../components/Header */ \"./src/components/Header.js\");\n\nvar _Header2 = _interopRequireDefault(_Header);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Login = function Login() {\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(_Header2.default, null),\n    _react2.default.createElement(\n      'div',\n      null,\n      'Login'\n    ),\n    _react2.default.createElement(\n      'button',\n      { onClick: function onClick() {\n          alert('11');\n        } },\n      '\\u6309\\u94AE'\n    )\n  );\n};\n\nexports.default = Login;\n\n//# sourceURL=webpack:///./src/containers/Login/index.js?");
 
 /***/ }),
 
@@ -118,7 +142,43 @@ eval("\n\nvar _koa = __webpack_require__(/*! koa */ \"koa\");\n\nvar _koa2 = _in
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _koaRouter = __webpack_require__(/*! koa-router */ \"koa-router\");\n\nvar _koaRouter2 = _interopRequireDefault(_koaRouter);\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _index = __webpack_require__(/*! ./containers/Home/index */ \"./src/containers/Home/index.js\");\n\nvar _index2 = _interopRequireDefault(_index);\n\nvar _server = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar routers = new _koaRouter2.default();\nvar content = (0, _server.renderToString)(_react2.default.createElement(_index2.default, null));\nrouters.get('/', function (ctx, next) {\n  ctx.body = '\\n    <html>\\n      <title>ssr dome</title>\\n      <body>\\n        <div id=\\'root\\'>' + content + '</div>\\n        <script type=\"text/javascript\" src=\"/index.js\"></script>\\n      </body>\\n    </html>\\n    ';\n  next();\n});\nexports.default = routers;\n\n//# sourceURL=webpack:///./src/koa-router.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _koaRouter = __webpack_require__(/*! koa-router */ \"koa-router\");\n\nvar _koaRouter2 = _interopRequireDefault(_koaRouter);\n\nvar _util = __webpack_require__(/*! ./server/util */ \"./src/server/util.js\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar routers = new _koaRouter2.default();\n\nrouters.get('/', function (ctx, next) {\n  ctx.body = (0, _util.render)(ctx);\n  next();\n});\nrouters.get('/login', function (ctx, next) {\n  ctx.body = (0, _util.render)(ctx);\n  next();\n});\nexports.default = routers;\n\n//# sourceURL=webpack:///./src/koa-router.js?");
+
+/***/ }),
+
+/***/ "./src/server/index.js":
+/*!*****************************!*\
+  !*** ./src/server/index.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nvar _koa = __webpack_require__(/*! koa */ \"koa\");\n\nvar _koa2 = _interopRequireDefault(_koa);\n\nvar _koaStatic = __webpack_require__(/*! koa-static */ \"koa-static\");\n\nvar _koaStatic2 = _interopRequireDefault(_koaStatic);\n\nvar _koaRouter = __webpack_require__(/*! ../koa-router */ \"./src/koa-router.js\");\n\nvar _koaRouter2 = _interopRequireDefault(_koaRouter);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar app = new _koa2.default(); // const Koa = require('koa')\n\n\nvar PORT = 9000;\n\n// 静态资源\napp.use((0, _koaStatic2.default)('./public'));\napp.use(_koaRouter2.default.routes(), _koaRouter2.default.allowedMethods());\n\napp.listen(PORT, function () {\n  console.log('\\u670D\\u52A1\\u5668\\u5DF2\\u7ECF\\u542F\\u52A8\\uFF0C\\u8BF7\\u8BBF\\u95EEhttp://localhost:' + PORT);\n});\n\n//# sourceURL=webpack:///./src/server/index.js?");
+
+/***/ }),
+
+/***/ "./src/server/util.js":
+/*!****************************!*\
+  !*** ./src/server/util.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.render = undefined;\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _server = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n\nvar _reactRouterDom = __webpack_require__(/*! react-router-dom */ \"react-router-dom\");\n\nvar _Routes = __webpack_require__(/*! ../Routes */ \"./src/Routes.js\");\n\nvar _Routes2 = _interopRequireDefault(_Routes);\n\nvar _mobxReact = __webpack_require__(/*! mobx-react */ \"mobx-react\");\n\nvar _store = __webpack_require__(/*! ../store/store */ \"./src/store/store.js\");\n\nvar _store2 = _interopRequireDefault(_store);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar render = exports.render = function render(req) {\n  var content = (0, _server.renderToString)(_react2.default.createElement(\n    _mobxReact.Provider,\n    { store: (0, _store2.default)() },\n    _react2.default.createElement(\n      _reactRouterDom.StaticRouter,\n      { context: {} },\n      _Routes2.default\n    )\n  ));\n  return '\\n  <html>\\n  <title>ssr dome</title>\\n  <body>\\n    <div id=\\'root\\'>' + content + '</div>\\n    <script type=\"text/javascript\" src=\"/index.js\"></script>\\n  </body>\\n  </html>\\n  ';\n};\n\n//# sourceURL=webpack:///./src/server/util.js?");
+
+/***/ }),
+
+/***/ "./src/store/store.js":
+/*!****************************!*\
+  !*** ./src/store/store.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _mobx = __webpack_require__(/*! mobx */ \"mobx\");\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nvar GlobalStore = function () {\n  function GlobalStore() {\n    _classCallCheck(this, GlobalStore);\n\n    this.state = (0, _mobx.observable)({\n      name: '张'\n    });\n  }\n\n  _createClass(GlobalStore, [{\n    key: 'updateStore',\n    value: function updateStore(key, data) {\n      this.state[key] = data;\n    }\n  }]);\n\n  return GlobalStore;\n}();\n\n// export default new GlobalStore()\n\n\nvar getStore = function getStore() {\n  return new GlobalStore();\n};\n\nexports.default = getStore;\n\n//# sourceURL=webpack:///./src/store/store.js?");
 
 /***/ }),
 
@@ -144,6 +204,39 @@ eval("module.exports = require(\"koa-router\");\n\n//# sourceURL=webpack:///exte
 
 /***/ }),
 
+/***/ "koa-static":
+/*!*****************************!*\
+  !*** external "koa-static" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"koa-static\");\n\n//# sourceURL=webpack:///external_%22koa-static%22?");
+
+/***/ }),
+
+/***/ "mobx":
+/*!***********************!*\
+  !*** external "mobx" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"mobx\");\n\n//# sourceURL=webpack:///external_%22mobx%22?");
+
+/***/ }),
+
+/***/ "mobx-react":
+/*!*****************************!*\
+  !*** external "mobx-react" ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"mobx-react\");\n\n//# sourceURL=webpack:///external_%22mobx-react%22?");
+
+/***/ }),
+
 /***/ "react":
 /*!************************!*\
   !*** external "react" ***!
@@ -163,6 +256,17 @@ eval("module.exports = require(\"react\");\n\n//# sourceURL=webpack:///external_
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"react-dom/server\");\n\n//# sourceURL=webpack:///external_%22react-dom/server%22?");
+
+/***/ }),
+
+/***/ "react-router-dom":
+/*!***********************************!*\
+  !*** external "react-router-dom" ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react-router-dom\");\n\n//# sourceURL=webpack:///external_%22react-router-dom%22?");
 
 /***/ })
 

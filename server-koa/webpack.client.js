@@ -17,11 +17,11 @@ module.exports = {
         // 额外的配置项 options  正确的编译react babel-preset-react es2015/2017 stage-0
         // 打包的时候兼容最新的两个浏览器版本
         options: {
-            presets: ['react', 'stage-0', ['env', {
+            presets: ['react', ['env', {
                 targets: {
                     browsers: ['last 2 versions']
                 }
-            }]]
+            }],'stage-0',]
         }
     }]
 }
