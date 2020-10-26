@@ -1,19 +1,11 @@
-import { observable, action } from 'mobx';
+import HomeStore from './home'
 
-class GlobalStore {
-  constructor() {
-    this.state = observable({
-      name: '张'
-    })
-  }
-  updateStore(key, data) {
-    this.state[key] = data;
-  }
+export { HomeStore }
+
+export default {
+  HomeStore
 }
 
-// export default new GlobalStore()
-const getStore = () => {
-  return new GlobalStore()
-}
-
-export default getStore
+export const createStoreMap = ()=> ({
+  HomeStore: new HomeStore()
+})

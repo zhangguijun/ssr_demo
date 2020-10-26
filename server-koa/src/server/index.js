@@ -5,7 +5,7 @@ import routes from '../koa-router';
 
 const app = new Koa();
 
-const PORT = 9000;
+const PORT = 8000;
 
 // 静态资源
 app.use(
