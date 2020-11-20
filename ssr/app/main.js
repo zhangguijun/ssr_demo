@@ -7,16 +7,21 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
-
+import { Provider } from 'mobx-react'
 import Router from './route/router'
 import './style/index.less'
+import { HomeStore } from '../app/store/index'
 
 // function App(){
 //   return <div>hello react</div>
 // }
+ 
 
 render(
-  <BrowserRouter>
-    <Router />
-  </BrowserRouter>
+  <Provider store={new HomeStore()}>
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  </Provider>
+
   , document.getElementById('app'))
