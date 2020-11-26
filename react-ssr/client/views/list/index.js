@@ -13,6 +13,7 @@ class List extends Component {
     super(props);
     this.state = {};
   }
+  
   render() {
     let { store: { HomeStore } } = this.props
     return (

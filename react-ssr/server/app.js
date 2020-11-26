@@ -22,6 +22,7 @@
 import React from 'react';
 import Koa from 'koa';
 // import { renderToString } from "react-dom/server";
+import apiRouter from './router/api'
 import demoRouter from './router/index'
 import template from './template'
 
@@ -30,8 +31,12 @@ const PORT = 9000;
 // const App = () => <div>Hello Koa SSR</div>
 
 app.use(template)
-
+// 页面
 app.use(demoRouter.routes(), demoRouter.allowedMethods());
+// api 路由
+app.use(apiRouter.routes(), apiRouter.allowedMethods());
+
+
 
 app.listen(PORT, () => {
     console.log(`node服务已经启动, 请访问localhost:${PORT}`)

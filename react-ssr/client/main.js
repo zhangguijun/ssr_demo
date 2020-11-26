@@ -8,6 +8,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './router'
+import { renderRoutes } from 'react-router-config'
 
 import { Provider } from 'mobx-react'
 
@@ -17,7 +18,7 @@ console.log(store)
 render(
     <Provider store={createStoreMap(store)}>
         <BrowserRouter>
-            <Router />
+            { renderRoutes(Router) }
         </BrowserRouter>
     </Provider>
     ,
