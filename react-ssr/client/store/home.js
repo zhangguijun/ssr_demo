@@ -7,7 +7,7 @@
 import {
   observable,
   action,
-  toJson
+  toJS
 } from 'mobx'
 
 export default class HomeStore {
@@ -19,10 +19,12 @@ export default class HomeStore {
     'koa有点意思',
     'ssr更有意思'
   ]
+  @observable data = {}
   constructor(props) {
     // this.name =  props.HomeStore.name || ''
     this.list = props && props.data && props.data.list || [];
     this.name = props && props.data && props.data.name || '涨' ;
+    Object.assign(this, props)
   }
 
   @action uploadList(list = []) {
@@ -31,10 +33,17 @@ export default class HomeStore {
   @action uploadPlayList(list = []) {
     this.playList = list
   }
-  toJson() {
+  @action updateData (data = {}){
+    console.log(JSON.parse(data), '打断点')
+    
+    this.data = Object.assign({}, JSON.parse(data))
+  }
+
+  toJs() {
     return {
       name: this.name,
-      list: this.list
+      list: this.list,
+      data: this.data
     };
   }
 

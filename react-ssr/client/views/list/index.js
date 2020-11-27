@@ -8,6 +8,8 @@ import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+@inject("store")
+@observer
 class List extends Component {
   constructor(props) {
     super(props);
@@ -15,10 +17,11 @@ class List extends Component {
   }
   
   render() {
-    let { store: { HomeStore } } = this.props
+    let { store: { HomeStore = {} } } = this.props
     return (
       <div>
-        <h1>{HomeStore.name}</h1>
+        <h1>{HomeStore.name || ''}</h1>
+        <Link to="/"> 返回首页</Link>
         <ul>
         { HomeStore.list.length > 0 && HomeStore.list.map((item, i) => <li key={ i }>{ item }</li>) }
     </ul>
@@ -26,8 +29,5 @@ class List extends Component {
     );
   }
 }
-export default withRouter(
-  inject('store')(
-    observer(List)
-  )
-);
+List.getInitialProps = ''
+export default List;

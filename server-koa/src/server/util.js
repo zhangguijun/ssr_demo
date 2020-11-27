@@ -16,7 +16,7 @@ export const render = (req) => {
   //     promises.push(item.route.loadData(store))
   //   }
   // })
-  Promise.all(promises).then(() => {
+  // Promise.all(promises).then(() => {
     const content = renderToString((
       <Provider store={store}>
         <StaticRouter context={{}}>
@@ -40,6 +40,6 @@ export const render = (req) => {
     </body>
     </html>
     `
-  })
+  
 
 }

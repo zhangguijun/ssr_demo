@@ -6,7 +6,10 @@ import React from 'react';
 import router from '../../client/router';
 // import template from '../template';
 
+import SSR from '../ssr'
 const routes = new Router();
+
+const server = new SSR();
 
 import render from '../template'
 // routes.get('/', (ctx, next) => {
@@ -43,8 +46,9 @@ import render from '../template'
 //     next();
 // })
 
-routes.get('/', async (ctx, next) => {
-    await render(ctx, template)
+routes.get('*', async (ctx, next) => {
+    // await render(ctx, template)
+    // ctx.body = server.renderAPP(ctx, {})
     next();
 })
 export default routes;

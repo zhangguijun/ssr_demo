@@ -5,22 +5,18 @@
  * @date 2020/11/23 16:58:31
 */
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate, render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './router'
 import { renderRoutes } from 'react-router-config'
-
+// import "babel-polyfill";
 import { Provider } from 'mobx-react'
+import renderBaseApp from './lib/renderBaseApp'
 
-import { createStoreMap } from './store/index'
 let store = window.__STORE__ || {}
-console.log(store)
-render(
-    <Provider store={createStoreMap(store)}>
-        <BrowserRouter>
-            { renderRoutes(Router) }
-        </BrowserRouter>
-    </Provider>
-    ,
+hydrate(
+    <div>
+        {renderBaseApp(store)}
+    </div>,
     document.getElementById('app')
 );

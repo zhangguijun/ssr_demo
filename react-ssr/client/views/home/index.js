@@ -6,25 +6,67 @@
 */
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
-import { withRouter } from 'react-router-dom';
+
+import { toJS } from 'mobx'
 import { Link } from 'react-router-dom';
+import { getData } from '../../api/index'
+// import './index.less'
+@inject("store")
+@observer
+
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  componentDidMount(){
+    let { store: { HomeStore = {} } } = this.props
+    if(Object.keys(HomeStore.data).length == 0){
+      getData().then(res => {
+
+        HomeStore.updateData(JSON.stringify(res))
+      })
+    }
+  }
+  // getInitialProps() {
+  //   return getHomeList
+  // }
+  renderList = (list) =>{
+    return(
+      <div>
+        {
+          list.length > 0 && list.map(item => {
+            return  <div className='list-item' key={item.id}>
+            <div className='list-item-left'>
+              <img src={item.coverImgUrl} alt=""/>
+            </div>
+            <div className='list-item-right'>
+              <p>{item.name}</p>
+              <p>{item.trackCount}首</p>
+    
+            </div>
+          </div>
+          })
+        }
+      </div>
+    )
+  }
   render() {
-    let { store: { HomeStore } } = this.props
+    let { store: { HomeStore = {} } } = this.props
+    // console.log(toJS(HomeStore.data.playlist))
     return (
       <div>
-        <h1>{HomeStore.name}</h1>
-        <Link to="/list">跳转列表页</Link>
+        <h1>{HomeStore.name || ''}</h1>
+        <Link to="/list/10">跳转列表页</Link>
+        {this.renderList(toJS(HomeStore.data.playlist) || [])}
       </div>
     );
   }
 }
-export default withRouter(
-  inject('store')(
-    observer(Index)
-  )
-);
+// export default withRouter(
+//   inject('store')(
+//     observer(Index)
+//   )
+// );
+Index.getInitialProps = getData 
+export default Index
