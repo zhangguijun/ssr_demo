@@ -34,6 +34,7 @@ import apiRouter from './router/api'
 import Router from 'koa-router'
 
 import cors  from 'koa2-cors';
+import koaStatic from 'koa-static';
 
 import routerConfig from '../client/router'
 
@@ -46,10 +47,13 @@ const server = new SSR();
 const PORT = 9000;
 // const App = () => <div>Hello Koa SSR</div>
 
+// 静态资源
+app.use(
+    koaStatic('./public')
+  );
 app.use(cors());
 // app.use(template)
 route.get('*', async (ctx, next) => {
-    ctx.set("Access-Control-Allow-Origin", "*")
     // await render(ctx, template)
     //  匹配路由  
     const currentRoute = routerConfig.find(r => matchPath(ctx.request.url, r)) || routerConfig[0]
@@ -70,21 +74,8 @@ route.get('*', async (ctx, next) => {
 
         const response = await Promise.all(ajaxs)
 
-        // ids.forEach((id, index) => {
-        //     // 通过 Object.defineProperty 将服务端拿到的数据塞到 context 中
-        //     Object.defineProperty(contextProps, id, {
-        //         enumerable: true,
-        //         configurable: true,
-        //         writable: true,
-        //         value: {
-        //             data: response[index],
-        //             pending: false,
-        //             error: null
-        //         }
-        //     })
-        // })
-
     } else {
+        // console.log(currentComponent)
         contextProps = {
             data: (getInitialProps && await getInitialProps()) || {}
         }

@@ -24,8 +24,7 @@ export default [
         exact: true
     },
     {
-        path: '/list/:id',
+        path: '/list',
         component: List,
-        exact: true
     }
 ]

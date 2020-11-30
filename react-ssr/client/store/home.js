@@ -34,8 +34,8 @@ export default class HomeStore {
     this.playList = list
   }
   @action updateData (data = {}){
-    console.log(JSON.parse(data), '打断点')
-    
+    // console.log(JSON.parse(data), '打断点')
+
     this.data = Object.assign({}, JSON.parse(data))
   }
 

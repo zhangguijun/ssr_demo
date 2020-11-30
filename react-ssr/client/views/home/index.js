@@ -8,9 +8,11 @@ import React, { Component } from 'react';
 import { observer, inject } from "mobx-react";
 
 import { toJS } from 'mobx'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { getData } from '../../api/index'
-// import './index.less'
+import style from  './index.less'
+import  withStyle  from '../../component/withStyle'
+
 @inject("store")
 @observer
 
@@ -18,6 +20,11 @@ class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+  componentWillMount(){
+    if(style._getCss){
+      console.log(style._getCss())
+    }
   }
   componentDidMount(){
     let { store: { HomeStore = {} } } = this.props
@@ -55,18 +62,23 @@ class Index extends Component {
     let { store: { HomeStore = {} } } = this.props
     // console.log(toJS(HomeStore.data.playlist))
     return (
-      <div>
+      <div className='index'>
         <h1>{HomeStore.name || ''}</h1>
-        <Link to="/list/10">跳转列表页</Link>
+        <Link to="/list">跳转列表页</Link>
         {this.renderList(toJS(HomeStore.data.playlist) || [])}
       </div>
     );
   }
 }
+// Index.getInitialProps = getData 
 // export default withRouter(
 //   inject('store')(
-//     observer(Index)
+//     observer(
+//       withStyle(Index)
+//     )
 //   )
 // );
-Index.getInitialProps = getData 
-export default Index
+
+let NewIndex = withStyle(Index, style)
+NewIndex.getInitialProps = getData 
+export default NewIndex

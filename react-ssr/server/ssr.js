@@ -15,6 +15,7 @@ import { renderRoutes } from 'react-router-config'
 import RouterConfig from '../client/router'
 import tpl from './template2'
 import { createStoreMap } from '../client/store/index'
+let ssrStyles = []
 class SSR {
   constructor(props) {
     Object.assign(this, props)
@@ -22,8 +23,18 @@ class SSR {
   getScripts = (context) => {
     return `
     <script type="text/javascript">window.__STORE__ = ${JSON.stringify(context)}</script>
-    <script src="http://localhost:8001/index.js"></script>
+    <script src="./index.js"></script>
     `
+  }
+  getStyle() {
+     const innerStyles = `<style type="text/css">${ssrStyles.reduceRight((a, b) => a + b, '')}</style>`
+     return innerStyles
+  }
+  addStyles(css) {
+    const styles = typeof css._getCss === 'function' ? css._getCss() : ''
+    if(!ssrStyles.includes(styles)) {
+      ssrStyles.push(css._getCss())
+    }
   }
   renderTemplate = props => {
     return Mustache.render(tpl(props))
@@ -31,7 +42,7 @@ class SSR {
   renderAPP(ctx, context) {
     const html = renderToString((
       <Provider store={new createStoreMap({ ...context })}>
-        <StaticRouter location={ctx.request.url} context={context}>
+        <StaticRouter location={ctx.request.url} context={{...context, addStyles: this.addStyles}}>
           {renderRoutes(RouterConfig)}
         </StaticRouter>
       </Provider>
@@ -39,9 +50,10 @@ class SSR {
     return this.renderTemplate({
       title: 'SSR你值得拥有',
       html,
-      scripts: this.getScripts(context)
+      scripts: this.getScripts(context),
+      css: this.getStyle()
     })
   }
 }
 
-module.exports = SSR
+export default SSR

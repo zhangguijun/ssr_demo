@@ -15,8 +15,8 @@ import renderBaseApp from './lib/renderBaseApp'
 
 let store = window.__STORE__ || {}
 hydrate(
-    <div>
+    <React.Fragment>
         {renderBaseApp(store)}
-    </div>,
+    </React.Fragment>,
     document.getElementById('app')
 );

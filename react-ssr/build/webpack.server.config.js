@@ -4,22 +4,23 @@
  * @author zh8
  * @date 2020/11/20 17:08:48
 */
-
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
+const nodeExternals = require('webpack-node-externals')
 const { resolve } = require('../utils');
 
 module.exports = {
-    entry: resolve('client/main.js'),
+    target: 'node',
+    mode: 'development',
+    entry: resolve('server/index.js'),
     output: {
         path: resolve('dist'),
-        filename: 'index.js'
+        filename: 'bundle.js'
     },
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
                 // 只编译app文件夹下的文件
-                include: resolve('client'),
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -31,19 +32,20 @@ module.exports = {
                 }
             },
             {
-                test: /\.html$/,
-                include: resolve('client'),
-                loader: 'html-loader'
-            },
-            {
-                test: /\.less/,
-                include: resolve('client'),
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'less-loader'
-                ]
-            },
+              test: /\.less?$/,
+              use: ['isomorphic-style-loader', 'css-loader', 'less-loader']
+          },
+          {
+              test: /\.css?$/,
+              use: ['isomorphic-style-loader', {
+                  loader: 'css-loader',
+                  options: {
+                      importLoaders: 1,
+                      modules: true,
+                      localIdentName: '[name]_[local]_[hash:base64:5]'
+                  }
+              }]
+          },
             {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: `url-loader?limit=1000`
@@ -55,20 +57,12 @@ module.exports = {
 
         ]
     },
-    resolve: {
-        // 设置路径别名
-        alias: {
-            '@': resolve('app'),
-        },
-        // 文件后缀自动补全, 就是你import文件的时候如果没写后缀名就会优先找下面这几个
-        extensions: ['.js', '.jsx'],
-    },
     // 第三方依赖，可以写在这里，不打包
-    externals: {},
+    externals: [nodeExternals()],
     plugins: [
-        new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: resolve('template/app.html')
-        })
-    ]
+      new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify('development'),
+          'process.env.VUE_ENV': '"server"'
+      }),
+  ]
 }
