@@ -57,7 +57,7 @@ module.exports = {
 
         ]
     },
-    // 第三方依赖，可以写在这里，不打包
+    // 第三方依赖，可以写在这里，不打包 不打包三方依赖
     externals: [nodeExternals()],
     plugins: [
       new webpack.DefinePlugin({

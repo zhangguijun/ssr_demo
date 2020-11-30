@@ -21,11 +21,11 @@ class Index extends Component {
     super(props);
     this.state = {};
   }
-  componentWillMount(){
-    if(style._getCss){
-      console.log(style._getCss())
-    }
-  }
+  // componentWillMount(){
+  //   if(style._getCss){
+  //     console.log(style._getCss())
+  //   }
+  // }
   componentDidMount(){
     let { store: { HomeStore = {} } } = this.props
     if(Object.keys(HomeStore.data).length == 0){

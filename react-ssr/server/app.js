@@ -53,6 +53,7 @@ app.use(
   );
 app.use(cors());
 // app.use(template)
+// 处理 路由渲染
 route.get('*', async (ctx, next) => {
     // await render(ctx, template)
     //  匹配路由  
@@ -73,6 +74,10 @@ route.get('*', async (ctx, next) => {
         })
 
         const response = await Promise.all(ajaxs)
+
+        contextProps = {
+            data: response
+        }
 
     } else {
         // console.log(currentComponent)

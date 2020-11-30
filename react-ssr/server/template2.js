@@ -1,3 +1,9 @@
+/*
+ * @description ssr 渲染的模板文件
+ * @fileName template2.js
+ * @author zh8
+ * @date 2020/11/30 18:14:57
+*/ 
 export default ({ title, scripts, css, html }) => `
   <!DOCTYPE html>
   <html lang="en">
