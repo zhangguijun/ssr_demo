@@ -12,7 +12,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { getData } from '../../api/index'
 import style from  './index.less'
 import  withStyle  from '../../component/withStyle'
-
+import logo from '../../static/logo.png'
+import LazyLoad from 'react-lazyload';
 @inject("store")
 @observer
 
@@ -45,7 +46,17 @@ class Index extends Component {
           list.length > 0 && list.map(item => {
             return  <div className='list-item' key={item.id}>
             <div className='list-item-left'>
-              <img src={item.coverImgUrl} alt=""/>
+            <LazyLoad
+                  // offset={100}
+                  height={100}
+                  placeholder={<img width="100%" height="100%" src={logo} alt="logo"/>}
+                >
+                  <img
+                    src={item.coverImgUrl}
+                    style={{ width: '100%' }}
+                    alt=""
+                  />
+                </LazyLoad>
             </div>
             <div className='list-item-right'>
               <p>{item.name}</p>
