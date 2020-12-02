@@ -16,6 +16,7 @@ module.exports = merge(baseConfig, {
   devtool: 'inline-source-map',
   mode: 'development',
   devServer: {
+    host: '0.0.0.0',
     port: 8001,
   },
   plugins: [

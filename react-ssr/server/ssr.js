@@ -9,7 +9,7 @@ import path from 'path'
 import fs from 'fs'
 import Mustache from 'mustache'
 import { StaticRouter } from 'react-router-dom'
-import { renderToString } from 'react-dom/server'
+import { renderToString, renderToNodeStream } from 'react-dom/server'
 import { Provider } from 'mobx-react'
 import { renderRoutes } from 'react-router-config'
 import RouterConfig from '../client/router'
@@ -50,7 +50,13 @@ class SSR {
   //将服务器上接收到的URL传递给路由用来匹配，同时支持传入context特性
   // 静态路由： 值得是在渲染之前就需要配置好路由信息
   // 动态路由： 随着应用渲染来起作用 无需事先配置好
+  /**
+   *
+   * renderToString =》 会返回所有html 字符
+   * renderToNodeStream =》 会以文件流的形式返回html 字符串
+   */
   renderAPP(ctx, context) {
+
     const html = renderToString((
       <Provider store={new createStoreMap({ ...context })}>
        
@@ -59,6 +65,15 @@ class SSR {
         </StaticRouter>
       </Provider>
     ))
+    // const html = renderToNodeStream((
+    //   <Provider store={new createStoreMap({ ...context })}>
+       
+    //     <StaticRouter location={ctx.request.url} context={{...context, addStyles: this.addStyles}}>
+    //       {renderRoutes(RouterConfig)}
+    //     </StaticRouter>
+    //   </Provider>
+    // ))
+    
     return this.renderTemplate({
       title: 'SSR你值得拥有',
       html,
