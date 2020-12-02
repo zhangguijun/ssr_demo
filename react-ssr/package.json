@@ -77,11 +77,13 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
+    "loadable-components": "^2.2.3",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-lazyload": "^3.1.0",
+    "react-loadable": "^5.5.0",
     "react-router": "^5.2.0",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.2.0"
