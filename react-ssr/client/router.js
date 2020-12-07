@@ -6,8 +6,21 @@
 */ 
 import { Switch, Route } from 'react-router-dom';
 import React from 'react';
-import Home from './views/home';
-import List from './views/list';
+import Loadable from 'loadable-components';
+
+const Loading = () => {
+  return ''
+};
+
+// import Home from './views/home';
+// import List from './views/list';
+const Home = Loadable(() => import('./views/home'),{
+    LoadingComponent: (props) => <Loading />,
+});
+
+const List = Loadable(() => import('./views/list'), {
+    LoadingComponent: (props) => <Loading />,
+})
 
 // export default () => (
 //     <Switch>
@@ -15,6 +28,7 @@ import List from './views/list';
 //         <Route exact path="/list" component={ List }/>
 //     </Switch>
 // )
+
 
 
 export default [
