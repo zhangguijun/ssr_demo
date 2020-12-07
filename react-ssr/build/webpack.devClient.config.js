@@ -4,7 +4,8 @@
  * @author zh8
  * @date 2020/10/26 13:37:36
 */
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve } = require('../utils');
 const merge = require('webpack-merge');
 
 const webpack = require('webpack');
@@ -22,6 +23,10 @@ module.exports = merge(baseConfig, {
   plugins: [
     new webpack.DefinePlugin({
       NODE_ENV: JSON.stringify('development')
-    })
+    }),
+      new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: resolve('template/app.html')
+        })
   ]
 })

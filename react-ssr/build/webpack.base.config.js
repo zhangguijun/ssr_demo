@@ -61,9 +61,6 @@ module.exports = {
     // 第三方依赖，可以写在这里，不打包
     externals: {},
     plugins: [
-        // new HtmlWebpackPlugin({
-        //     filename: 'index.html',
-        //     template: resolve('template/app.html')
-        // })
+
     ]
 }

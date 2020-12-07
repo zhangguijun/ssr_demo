@@ -5,39 +5,16 @@
  * @date 2020/11/23 17:02:21
 */
 
-// const Koa = require('koa');
-// const Router = require('koa-router');
-// const app = new Koa();
-// const route = new Router();
-
-
-// const PORT = 9000;
-// route.get('*', async (ctx, next) => {
-//     ctx.body = '111'
-// })
-// // app.use(ctx => {
-// //     ctx.body = '<div>Hello Koa<div/>'
-// // })
-// app.use(route.routes(), route.allowedMethods());
-// app.listen(PORT, () => {
-//     console.log(`node服务已经启动, 请访问localhost:${PORT}`)
-// })
-
-// jsx编译之后会用到React对象, 所以需要引入
-import React from 'react';
 import Koa from 'koa';
-import { matchPath } from 'react-router-dom'
-// import { renderToString } from "react-dom/server";
-import apiRouter from './router/api'
-// import demoRouter from './router/index'
-// import template from './template'
 import Router from 'koa-router'
-
 import cors  from 'koa2-cors';
 import koaStatic from 'koa-static';
+import { matchPath } from 'react-router-dom'
 
+import apiRouter from './router/api'
+// 公用路由表
 import routerConfig from '../client/router'
-
+// ssr 配置
 import SSR from './ssr'
 
 const app = new Koa();
@@ -51,8 +28,8 @@ const PORT = 9000;
 app.use(
     koaStatic('./public')
   );
+// 解决跨域
 app.use(cors());
-// app.use(template)
 // 处理 路由渲染
 route.get('*', async (ctx, next) => {
     // await render(ctx, template)

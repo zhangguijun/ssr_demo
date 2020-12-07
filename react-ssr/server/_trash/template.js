@@ -1,12 +1,12 @@
 import fs from 'fs';
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
-import RouterConfig from '../client/router'
+import RouterConfig from '../../client/router'
 import React from 'react';
 import path from 'path';
 import { Provider } from 'mobx-react'
 
-import { createStoreMap } from '../client/store/index'
+import { createStoreMap } from '../../client/store/index'
 import { renderRoutes } from 'react-router-config'
 import { template } from '@babel/core';
 // 匹配模板中的{{}}

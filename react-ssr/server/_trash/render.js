@@ -1,4 +1,4 @@
-import { createStoreMap } from '../client/store/index'
+import { createStoreMap } from '../../client/store/index'
 const { renderToString } = require('react-dom/server');
 
 function templating(template) {
