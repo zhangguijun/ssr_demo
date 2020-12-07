@@ -1,54 +1,49 @@
 import Router from 'koa-router';
-// import RouterConfig from '../../client/router';
-// import { StaticRouter } from 'react-router-dom';
-// import { renderToString } from "react-dom/server";
-import React from 'react';
-import router from '../../client/router';
-// import template from '../template';
+import { matchPath } from 'react-router-dom'
 
+// 公共路由配置表
+import routerConfig from '../../client/router'
+
+// ssr 配置
 import SSR from '../ssr'
+const server = new SSR();
 const routes = new Router();
 
-const server = new SSR();
-
-import render from '../template'
-// routes.get('/', (ctx, next) => {
-//     // ctx.body = renderToString(
-//     //     <StaticRouter location={ctx.url}>
-//     //         <RouterConfig/>
-//     //     </StaticRouter>
-//     // )
-//     ctx.render(
-//         {
-//             data: {
-//                 name: '涨'
-//             }
-//         }
-//     )
-//     next();
-// })
-
-// routes.get('/list',  (ctx, next) => {
-//     // ctx.body = renderToString(
-//     //     <StaticRouter location={ctx.url}>
-//     //         <RouterConfig/>
-//     //     </StaticRouter>
-//     // )
-//     ctx.render({
-//         data: {
-//             list: [
-//                 '我是从node中获取的数据',
-//                 '感觉还不错',
-//                 '测试成功',
-//             ]
-//         }
-//     })
-//     next();
-// })
-
 routes.get('*', async (ctx, next) => {
-    // await render(ctx, template)
-    // ctx.body = server.renderAPP(ctx, {})
-    next();
+  // await render(ctx, template)
+  //  匹配路由  
+  const currentRoute = routerConfig.find(r => matchPath(ctx.request.url, r)) || routerConfig[0]
+  const currentComponent = currentRoute && currentRoute.component;
+  const { getInitialProps } =  await currentComponent.load() || {}
+  let contextProps = {}
+  if (getInitialProps && Array.isArray(getInitialProps)) {
+      // 多个请求
+      let ajaxs = []
+      let ids = []
+
+      getInitialProps.forEach(_ => {
+          // ajaxs.push(_.ajax())
+          // ids.push(_.id)
+      })
+
+      const response = await Promise.all(ajaxs)
+
+      contextProps = {
+          data: response
+      }
+
+  } else {
+      // console.log(currentComponent)
+      contextProps = {
+          data: (getInitialProps && await getInitialProps()) || {}
+      }
+  }
+  // console.log(contextProps)
+  ctx.body = server.renderAPP(ctx, {
+      ...contextProps
+  })
+  await next()
+  // crx.body = 1
+  // next();
 })
 export default routes;

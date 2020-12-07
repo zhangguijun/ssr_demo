@@ -6,17 +6,16 @@
 */
 
 import React from 'react';
-import Router from '../router'
 import { renderRoutes } from 'react-router-config'
 import { Provider } from 'mobx-react'
 import { createStoreMap } from '../store/index'
 import { BrowserRouter } from 'react-router-dom';
-export const renderBaseApp = (context) => {
+export const renderBaseApp = (context, router) => {
 
   return (
-    <Provider store={createStoreMap(context)}>
+    <Provider store={createStoreMap(context, router)}>
       <BrowserRouter>
-        {renderRoutes(Router)}
+        {renderRoutes(router)}
       </BrowserRouter>
     </Provider>
   )
