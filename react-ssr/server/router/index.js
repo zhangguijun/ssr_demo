@@ -2,7 +2,7 @@ import Router from 'koa-router';
 import { matchPath } from 'react-router-dom'
 
 // 公共路由配置表
-import routerConfig from '../../client/router'
+import routerConfig from '../../client/route/router'
 
 // ssr 配置
 import SSR from '../ssr'
