@@ -21,8 +21,7 @@ app.use(
   );
 // 解决跨域
 app.use(cors());
-// // 处理 路由渲染
-// app.use(route.routes(), route.allowedMethods());
+// 处理 路由渲染
 
 // 页面
 app.use(viewRouter.routes(), viewRouter.allowedMethods());

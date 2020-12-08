@@ -12,7 +12,7 @@ import { StaticRouter } from 'react-router-dom'
 import { renderToString, renderToNodeStream } from 'react-dom/server'
 import { Provider } from 'mobx-react'
 import { renderRoutes } from 'react-router-config'
-import RouterConfig from '../client/router'
+import RouterConfig from '../client/route/router'
 import tpl from './template2'
 import { createStoreMap } from '../client/store/index'
 let ssrStyles = []
