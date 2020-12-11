@@ -22,7 +22,7 @@ export default class HomeStore {
   @observable data = {}
   constructor(props) {
     // this.name =  props.HomeStore.name || ''
-    this.list = props && props.data && props.data.list || [];
+    // this.list = props && props.data && props.data.list || [];
     this.name = props && props.data && props.data.name || '涨' ;
     Object.assign(this, props)
   }
