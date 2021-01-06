@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "koa": "^2.13.0",
     "koa-router": "^9.1.0",
     "koa-static": "^5.0.0",
