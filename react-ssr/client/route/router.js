@@ -21,6 +21,9 @@ const Home = Loadable(() => import('../views/home'),{
 const List = Loadable(() => import('../views/list'), {
     LoadingComponent: (props) => <Loading />,
 })
+const Demo = Loadable(()=> import('../views/demo'), {
+    LoadingComponent: (props) => <Loading />
+})
 
 // export default () => (
 //     <Switch>
@@ -40,5 +43,9 @@ export default [
     {
         path: '/list',
         component: List,
+    }, 
+    {
+        path: '/demo',
+        component: Demo,
     }
 ]

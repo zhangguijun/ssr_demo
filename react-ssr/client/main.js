@@ -17,6 +17,7 @@ let store = window.__STORE__ || {}
 if (window.__STORE__) {
     // 匹配路由 
     const currentRoute = Router.find(r => matchPath(document.location.pathname, r)) || Router[0]
+    // 获取当前路由组件
     const currentComponent = currentRoute && currentRoute.component;
     // 懒加载
     //当前组件完全加载进来后进行页面渲染
